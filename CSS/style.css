@@ -1,0 +1,399 @@
+/* --- Global Styles and Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Color Variables (Root) --- */
+:root {
+    --bg-color: #1a1a2e;
+    --card-color: #2c2c47;
+    --text-color: #e4e4e4;
+    --accent-color: #00bcd4; /* Main primary color */
+    --light-accent: #2e8b99; /* Edit button color */
+    --delete-color: #ff6b6b; /* Delete button color */
+    --pending-color: #ffc107;
+    --completed-color: #28a745;
+}
+
+/* --- Body and Layout (Sticky Footer Setup) --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Stacks content vertically */
+}
+
+.main-content {
+    flex-grow: 1; /* Pushes footer down */
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: var(--card-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* --- Input Form Styles --- */
+#todo-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#todo-form input[type="text"],
+#todo-form input[type="date"] {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #3b3b5c;
+    color: var(--text-color);
+    flex-grow: 1;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+#todo-form input:focus {
+    box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+#todo-form button {
+    padding: 12px 25px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#todo-form button:hover {
+    background-color: #00e5ff;
+}
+#todo-form button:active {
+    transform: scale(0.98);
+}
+
+/* --- Control Bar (Search, Filter, Delete All) --- */
+.controls-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+#search-input,
+#filter-select {
+    padding: 10px;
+    border: 1px solid #3b3b5c;
+    border-radius: 6px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    outline: none;
+}
+
+#search-input {
+    flex-grow: 1;
+}
+
+/* Custom styling for select dropdown */
+#filter-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23e4e4e4' d='M7.24 11.03l4.74-4.74-1.42-1.42-3.32 3.32-3.32-3.32L2.5 6.29l4.74 4.74z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px;
+}
+
+#delete-all-btn {
+    padding: 10px 15px;
+    background-color: var(--delete-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#delete-all-btn:hover {
+    background-color: #ff4747;
+}
+
+/* --- Table Styles --- */
+.table-responsive {
+    position: static;
+    overflow-x: auto;
+}
+
+#todo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    text-align: left;
+    table-layout: auto; 
+}
+
+#todo-list { 
+    display: table-row-group;
+    min-height: auto; 
+}
+
+#todo-list tr {
+    display: table-row;
+    width: auto;
+    table-layout: auto;
+    border-bottom: 1px solid #404060;
+}
+
+#todo-table th,
+#todo-table td {
+    padding: 15px 15px;
+}
+
+/* Table Header Styles */
+#todo-table th {
+    background-color: #3b3b5c;
+    color: var(--accent-color);
+    font-weight: 500;
+    text-align: center; 
+}
+
+/* Column Widths */
+#todo-table thead tr th:nth-child(1) {
+    width: 40%; 
+    text-align: center;
+    border-radius: 8px 0 0 0;
+}
+#todo-table thead tr th:nth-child(2) { width: 15%; } /* Due Date */
+#todo-table thead tr th:nth-child(3) { width: 15%; } /* Status */
+#todo-table thead tr th:nth-child(4) { 
+    width: 25%; /* Actions */
+    border-radius: 0 8px 0 0;
+}
+
+/* Text alignment for body cells */
+#todo-table tbody tr td:nth-child(2), 
+#todo-table tbody tr td:nth-child(3), 
+#todo-table tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+/* Row Hover Effect */
+#todo-table tbody tr:hover {
+    background-color: #353555;
+}
+
+/* --- Status Button Styles --- */
+.status-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.status-btn.pending {
+    background-color: var(--pending-color);
+    color: #333;
+}
+
+.status-btn.completed {
+    background-color: var(--completed-color);
+    color: white;
+}
+
+/* Line-through for completed tasks */
+.completed-task {
+    text-decoration: line-through;
+    color: #8a8a8a;
+}
+
+/* --- Action Buttons (Edit/Delete) --- */
+.action-buttons button {
+    padding: 8px 12px;
+    margin: 0 3px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.edit-btn {
+    background-color: var(--light-accent);
+    color: white;
+}
+.edit-btn:hover {
+    background-color: #4da3b0;
+}
+
+.delete-btn {
+    background-color: var(--delete-color);
+    color: white;
+}
+.delete-btn:hover {
+    background-color: #ff4747;
+}
+
+/* --- 'No Tasks Found' Row --- */
+#todo-table .no-tasks-placeholder td {
+    text-align: center;
+    font-style: italic;
+    color: #8a8a8a;
+    background-color: #353555;
+    padding: 23px 15px;
+    border-radius: 0 0 8px 8px;
+}
+
+#no-tasks-row {
+    border-bottom: none !important; 
+}
+
+/* --- Pagination Controls --- */
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#pagination-controls button {
+    padding: 10px 18px;
+    background-color: #404060;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#pagination-controls button:hover:not(:disabled) {
+    background-color: #555580;
+}
+
+#pagination-controls button:disabled {
+    background-color: #30304a;
+    color: #666;
+    cursor: not-allowed;
+}
+
+#page-info {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* --- Edit Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stays in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: var(--card-color);
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 30px;
+    border: 1px solid #404060;
+    width: 90%; 
+    max-width: 450px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    color: #999;
+    float: right;
+    font-size: 32px;
+    font-weight: lighter;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Edit Form inside Modal */
+#edit-form label {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-top: 10px;
+    display: block;
+}
+
+#edit-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 20px 0;
+    border: 1px solid #404060;
+    border-radius: 4px;
+    background-color: #3b3b5c;
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+#edit-form button {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+/* --- Footer --- */
+.footer {
+    text-align: center;
+    margin-top: 20px; 
+    padding: 10px 0;
+    font-size: 0.9em;
+    color: #8a8a8a;
+    padding-bottom: 20px;
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #00e5ff;
+    text-decoration: underline;
+}
