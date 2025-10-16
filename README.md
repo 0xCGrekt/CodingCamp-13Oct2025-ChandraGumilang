@@ -7,4 +7,5 @@ Key Features:
 - Task Status: The Status button (Pending/Completed) indicates the task's condition. Clicking this button toggles the task's status (from Pending to Completed, and vice versa).
 - Edit Task: The Edit button launches a modal, allowing users to modify the existing task text and due date.
 
-<img width="1919" height="941" alt="image" src="https://github.com/user-attachments/assets/e8fcd6f9-d511-47f1-b246-f92a76fc09c8" />
+<img width="1902" height="941" alt="image" src="https://github.com/user-attachments/assets/a1ed740e-ffc8-4abc-b3b5-261c361d966d" />
+
