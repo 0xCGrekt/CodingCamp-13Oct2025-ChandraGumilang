@@ -226,10 +226,13 @@ h1 {
     color: white;
 }
 
-/* Line-through for completed tasks */
+Line-through for completed tasks
 .completed-task {
-    text-decoration: line-through;
     color: #8a8a8a;
+}
+
+.completed-task td:first-child {
+    text-decoration: line-through;
 }
 
 /* --- Action Buttons (Edit/Delete) --- */

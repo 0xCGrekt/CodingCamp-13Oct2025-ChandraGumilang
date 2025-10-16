@@ -111,7 +111,6 @@ const renderTasks = () => {
     // 4. Update Message Status & Pagination UI
     updatePaginationUI(totalPages, filteredTasks.length);
     
-    // Add back the noTasksRow if no tasks are visible after filter/pagination
     if (tasksToRender.length === 0 && filteredTasks.length === 0) {
         if (noTasksRow) {
             todoList.appendChild(noTasksRow);
@@ -181,7 +180,7 @@ const toggleStatus = (e) => {
     const task = tasks.find(t => t.id === id);
     
     if (task) {
-        task.completed = !task.completed;
+        task.completed = !task.completed; 
         saveTasks();
         
         // Update the status display in the DOM
